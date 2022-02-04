@@ -18,7 +18,7 @@ function MenuItems() {
       }}
       defaultSelectedKeys={[pathname]}
     >
-      <Menu.Item key="/quickstart">
+      {/* <Menu.Item key="/quickstart">
         <NavLink to="/quickstart">🚀 Quick Start</NavLink>
       </Menu.Item>
       <Menu.Item key="/wallet">
@@ -35,13 +35,19 @@ function MenuItems() {
       </Menu.Item>
       <Menu.Item key="/erc20transfers">
         <NavLink to="/erc20transfers">💸 Transfers</NavLink>
+      </Menu.Item> */}
+      <Menu.Item key="/nftMarket">
+        <NavLink to="/nftMarket">🛒 Marketplace</NavLink>
       </Menu.Item>
       <Menu.Item key="/nftBalance">
         <NavLink to="/nftBalance">🖼 NFTs</NavLink>
       </Menu.Item>
-      <Menu.Item key="/contract">
-        <NavLink to="/contract">📄 Contract</NavLink>
+      <Menu.Item key="/transactions">
+        <NavLink to="/transactions">💸 Transactions</NavLink>
       </Menu.Item>
+      {/* <Menu.Item key="/contract">
+        <NavLink to="/contract">📄 Contract</NavLink>
+      </Menu.Item> */}
     </Menu>
   );
 }
