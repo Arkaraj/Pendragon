@@ -39,7 +39,7 @@ function MenuItems() {
       <Menu.Item key="/nftMarket">
         <NavLink to="/nftMarket">🛒 Marketplace</NavLink>
       </Menu.Item>
-      <Menu.Item key="/nftBalance">
+      <Menu.Item key="/nft">
         <NavLink to="/nftBalance">🖼 NFTs</NavLink>
       </Menu.Item>
       <Menu.Item key="/transactions">

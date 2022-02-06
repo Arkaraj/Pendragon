@@ -1,14 +1,10 @@
 import { useEffect } from "react";
 import { useMoralis } from "react-moralis";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Account from "components/Account/Account";
 import Chains from "components/Chains";
 import NFTBalance from "components/NFTBalance";
+import NFTTokenIds from "components/NFTTokenids";
 import { Layout } from "antd";
 import "antd/dist/antd.css";
 import NativeBalance from "components/NativeBalance";
@@ -77,13 +73,10 @@ const App = ({ isServerInfo }) => {
               <NFTBalance />
             </Route>
             <Route path="/nftMarket">
-              <NFTBalance />
+              <NFTTokenIds />
             </Route>
             <Route path="/transactions">
               <NFTBalance />
-            </Route>
-            <Route path="/nonauthenticated">
-              <>Please login using the "Authenticate" button</>
             </Route>
           </Switch>
         </div>
