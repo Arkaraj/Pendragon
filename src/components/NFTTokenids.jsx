@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useMoralis, useNFTTokenIds } from "react-moralis";
+import { useMoralis } from "react-moralis";
+import { useNFTTokenIds } from "hooks/useNFTTokenids";
 import { Card, Image, Tooltip, Modal, Input, Skeleton } from "antd";
-import {
-  FileSearchOutlined,
-  SendOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
+import { FileSearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { getExplorer } from "helpers/networks";
 import AddressInput from "./AddressInput";
 import { useVerifyMetadata } from "hooks/useVerifyMetadata";
@@ -25,8 +22,8 @@ const styles = {
   },
 };
 
-function NFTTokenids() {
-  const { data: NFTTokenIds } = useNFTTokenIds();
+function NFTTokenids({ inputValue, setInputValue }) {
+  const { NFTTokenIds } = useNFTTokenIds(inputValue);
   const { Moralis, chainId } = useMoralis();
   const [visible, setVisibility] = useState(false);
   const [receiverToSend, setReceiver] = useState(null);

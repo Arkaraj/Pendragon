@@ -5,7 +5,7 @@ import {
   useMoralis,
 } from "react-moralis";
 
-const useNFTTokenIds = (options) => {
+export const useNFTTokenIds = (addr) => {
   const { token } = useMoralisWeb3Api();
   const { chainId } = useMoralis();
   const [NFTTokenIds, setNFTTokenIds] = useState([]);
@@ -16,11 +16,35 @@ const useNFTTokenIds = (options) => {
     isLoading,
   } = useMoralisWeb3ApiCall(token.getAllTokenIds, {
     chain: chainId,
-    address: "0xd28bfaea8c886ff6424141278a928f3cde2741f1",
-    ...options,
+    address: addr,
+    limit: 10,
   });
-
-  useEffect(() => data && setNFTTokenIds(data?.result), [data]);
+  console.log(token);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    if (data?.result) {
+      const NFTs = data.result;
+      setTotalNFTs(data.total);
+      setFetchSuccess(true);
+      for (let NFT of NFTs) {
+        if (NFT?.metadata) {
+          NFT.metadata = JSON.parse(NFT.metadata);
+          NFT.image = resolveLink(NFT.metadata?.image);
+        } else if (NFT?.token_uri) {
+          try {
+            await fetch(NFT.token_uri)
+              .then((response) => response.json())
+              .then((data) => {
+                NFT.image = resolveLink(data.image);
+              });
+          } catch (error) {
+            setFetchSuccess(false);
+          }
+        }
+      }
+      setNFTTokenIds(NFTs);
+    }
+  }, [data]);
 
   return {
     getNativeTransations,
@@ -31,4 +55,4 @@ const useNFTTokenIds = (options) => {
   };
 };
 
-export default useNFTTokenIds;
+// export default useNFTTokenIds;

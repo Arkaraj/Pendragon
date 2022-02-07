@@ -1,16 +1,17 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Account from "components/Account/Account";
 import Chains from "components/Chains";
 import NFTBalance from "components/NFTBalance";
-import NFTTokenIds from "components/NFTTokenids";
+import NFTTokenids from "components/NFTTokenids";
 import { Layout } from "antd";
 import "antd/dist/antd.css";
 import NativeBalance from "components/NativeBalance";
 import "./style.css";
 import Text from "antd/lib/typography/Text";
 import MenuItems from "./components/MenuItems";
+import SearchCollections from "components/searchCollections";
 const { Header, Footer } = Layout;
 
 const styles = {
@@ -54,11 +55,16 @@ const App = ({ isServerInfo }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
+  const [inputValue, setInputValue] = useState(
+    "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
+  );
+
   return (
     <Layout style={{ height: "100vh", overflow: "auto" }}>
       <Router>
         <Header style={styles.header}>
           <Logo />
+          <SearchCollections setInputValue={setInputValue} />
           <MenuItems />
           <div style={styles.headerRight}>
             <Chains />
@@ -73,7 +79,10 @@ const App = ({ isServerInfo }) => {
               <NFTBalance />
             </Route>
             <Route path="/nftMarket">
-              <NFTTokenIds />
+              <NFTTokenids
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+              />
             </Route>
             <Route path="/transactions">
               <NFTBalance />
