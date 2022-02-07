@@ -17,9 +17,9 @@ export const useNFTTokenIds = (addr) => {
   } = useMoralisWeb3ApiCall(token.getAllTokenIds, {
     chain: chainId,
     address: addr,
-    limit: 10,
+    limit: 100,
   });
-  console.log(token);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     if (data?.result) {

@@ -4,8 +4,8 @@ import { getCollectionsByChain } from "helpers/collections";
 
 function SearchCollections({ setInputValue }) {
   const { Option } = Select;
-  const { chainId } = useMoralisDapp();
-  const NFTCollections = getCollectionsByChain(chainId);
+  //   const { chainId } = useMoralisDapp();
+  const NFTCollections = getCollectionsByChain("0x1");
 
   function onChange(value) {
     setInputValue(value);

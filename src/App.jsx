@@ -55,9 +55,8 @@ const App = ({ isServerInfo }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
-  const [inputValue, setInputValue] = useState(
-    "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
-  );
+  // 0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb
+  const [inputValue, setInputValue] = useState("explore");
 
   return (
     <Layout style={{ height: "100vh", overflow: "auto" }}>
