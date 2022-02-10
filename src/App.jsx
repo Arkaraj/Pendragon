@@ -64,7 +64,7 @@ const App = ({ isServerInfo }) => {
         <Header style={styles.header}>
           <Logo />
           <SearchCollections setInputValue={setInputValue} />
-          <MenuItems />
+          <MenuItems setInputValue={setInputValue} />
           <div style={styles.headerRight}>
             <Chains />
             <NativeBalance />

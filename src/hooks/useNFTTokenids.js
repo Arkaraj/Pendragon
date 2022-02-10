@@ -1,16 +1,17 @@
+import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 import { useEffect, useState } from "react";
-import {
-  useMoralisWeb3Api,
-  useMoralisWeb3ApiCall,
-  useMoralis,
-} from "react-moralis";
+import { useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
+import { useIPFS } from "./useIPFS";
 
 export const useNFTTokenIds = (addr) => {
   const { token } = useMoralisWeb3Api();
-  const { chainId } = useMoralis();
+  const { chainId } = useMoralisDapp();
+  const { resolveLink } = useIPFS();
   const [NFTTokenIds, setNFTTokenIds] = useState([]);
+  const [totalNFTs, setTotalNFTs] = useState();
+  const [fetchSuccess, setFetchSuccess] = useState(true);
   const {
-    fetch: getNativeTransations,
+    fetch: getNFTTokenIds,
     data,
     error,
     isLoading,
@@ -44,15 +45,14 @@ export const useNFTTokenIds = (addr) => {
       }
       setNFTTokenIds(NFTs);
     }
-  }, [data]);
+  }, [data, resolveLink]);
 
   return {
-    getNativeTransations,
+    getNFTTokenIds,
     NFTTokenIds,
-    chainId,
+    totalNFTs,
+    fetchSuccess,
     error,
     isLoading,
   };
 };
-
-// export default useNFTTokenIds;
