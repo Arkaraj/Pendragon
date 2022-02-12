@@ -1,17 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Account from "components/Account/Account";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
+import Account from "components/Account";
 import Chains from "components/Chains";
 import NFTBalance from "components/NFTBalance";
-import NFTTokenids from "components/NFTTokenids";
-import { Layout } from "antd";
+import NFTTokenIds from "components/NFTTokenIds";
+import { Menu, Layout } from "antd";
+import SearchCollections from "components/SearchCollections";
 import "antd/dist/antd.css";
 import NativeBalance from "components/NativeBalance";
 import "./style.css";
 import Text from "antd/lib/typography/Text";
-import MenuItems from "./components/MenuItems";
-import SearchCollections from "components/searchCollections";
+// import NFTMarketTransactions from "components/NFTMarketTransactions";
 const { Header, Footer } = Layout;
 
 const styles = {
@@ -48,15 +54,12 @@ const App = ({ isServerInfo }) => {
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
     useMoralis();
 
+  const [inputValue, setInputValue] = useState("explore");
+
   useEffect(() => {
-    const connectorId = window.localStorage.getItem("connectorId");
-    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
-      enableWeb3({ provider: connectorId });
+    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
-
-  // 0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb
-  const [inputValue, setInputValue] = useState("explore");
 
   return (
     <Layout style={{ height: "100vh", overflow: "auto" }}>
@@ -64,29 +67,51 @@ const App = ({ isServerInfo }) => {
         <Header style={styles.header}>
           <Logo />
           <SearchCollections setInputValue={setInputValue} />
-          <MenuItems setInputValue={setInputValue} />
+          <Menu
+            theme="light"
+            mode="horizontal"
+            style={{
+              display: "flex",
+              fontSize: "17px",
+              fontWeight: "500",
+              marginLeft: "50px",
+              width: "100%",
+            }}
+            defaultSelectedKeys={["nftMarket"]}
+          >
+            <Menu.Item key="nftMarket" onClick={() => setInputValue("explore")}>
+              <NavLink to="/NFTMarketPlace">🛒 Explore Market</NavLink>
+            </Menu.Item>
+            <Menu.Item key="nft">
+              <NavLink to="/nftBalance">🖼 Your Collection</NavLink>
+            </Menu.Item>
+            <Menu.Item key="transactions">
+              <NavLink to="/Transactions">📑 Your Transactions</NavLink>
+            </Menu.Item>
+          </Menu>
           <div style={styles.headerRight}>
             <Chains />
             <NativeBalance />
             <Account />
           </div>
         </Header>
-
         <div style={styles.content}>
           <Switch>
             <Route path="/nftBalance">
               <NFTBalance />
             </Route>
-            <Route path="/nftMarket">
-              <NFTTokenids
+            <Route path="/NFTMarketPlace">
+              <NFTTokenIds
                 inputValue={inputValue}
                 setInputValue={setInputValue}
               />
             </Route>
-            <Route path="/transactions">
+            <Route path="/Transactions">
+              {/* <NFTMarketTransactions /> */}
               <NFTBalance />
             </Route>
           </Switch>
+          <Redirect to="/NFTMarketPlace" />
         </div>
       </Router>
       <Footer style={{ textAlign: "center" }}>

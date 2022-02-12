@@ -27,19 +27,12 @@ export default function QuickStart({ isServerInfo }) {
 
   const isInchDex = useMemo(
     () => (Moralis.Plugins?.oneInch ? true : false),
-    [Moralis.Plugins?.oneInch],
+    [Moralis.Plugins?.oneInch]
   );
 
   return (
     <div style={{ display: "flex", gap: "10px" }}>
-      <Card
-        style={styles.card}
-        title={
-          <>
-            📝 <Text strong>To-Do List</Text>
-          </>
-        }
-      >
+      <Card style={styles.card} title={<h1 style={styles.title}>📝 To-Do List</h1>}>
         <Timeline mode="left" style={styles.timeline}>
           <Timeline.Item dot="📄">
             <Text delete style={styles.text}>
@@ -89,9 +82,8 @@ export default function QuickStart({ isServerInfo }) {
 
           <Timeline.Item dot="🔏">
             <Text delete={isServerInfo} style={styles.text}>
-              Rename <Text code>.env.example</Text> to <Text code>.env</Text>{" "}
-              and provide your <Text strong>appId</Text> and{" "}
-              <Text strong>serverUrl</Text> from{" "}
+              Rename <Text code>.env.example</Text> to <Text code>.env</Text> and provide your{" "}
+              <Text strong>appId</Text> and <Text strong>serverUrl</Text> from{" "}
               <a
                 href="https://moralis.io?utm_source=boilerplatehosted&utm_medium=todo&utm_campaign=ethereum-boilerplate"
                 target="_blank"
@@ -105,8 +97,7 @@ export default function QuickStart({ isServerInfo }) {
               REACT_APP_MORALIS_APPLICATION_ID = xxxxxxxxxxxx
             </Text>
             <Text code delete={isServerInfo} style={{ display: "block" }}>
-              REACT_APP_MORALIS_SERVER_URL =
-              https://xxxxxx.grandmoralis.com:2053/server
+              REACT_APP_MORALIS_SERVER_URL = https://xxxxxx.grandmoralis.com:2053/server
             </Text>
           </Timeline.Item>
 
@@ -126,8 +117,7 @@ export default function QuickStart({ isServerInfo }) {
               >
                 1inch Moralis Plugin
               </a>{" "}
-              needed for the<Text code>{"<InchDex />"}</Text> component
-              (optional)
+              needed for the<Text code>{"<InchDex />"}</Text> component (optional)
             </Text>
           </Timeline.Item>
 
@@ -139,11 +129,7 @@ export default function QuickStart({ isServerInfo }) {
       <div>
         <Card
           style={styles.card}
-          title={
-            <>
-              💣 <Text strong>Starting Local Chain (optional)</Text>
-            </>
-          }
+          title={<h1 style={styles.title}>💣 Starting Local Chain (optional)</h1>}
         >
           <Timeline mode="left" style={styles.timeline}>
             <Timeline.Item dot="💿">
@@ -169,31 +155,24 @@ export default function QuickStart({ isServerInfo }) {
             </Timeline.Item>
             <Timeline.Item dot="⚙️">
               <Text style={styles.text}>
-                Start you local devchain: <Text code>npm run devchain</Text> on
-                a new terminal
+                Start you local devchain: <Text code>npm run devchain</Text> on a new terminal
               </Text>
             </Timeline.Item>
             <Timeline.Item dot="📡">
               <Text style={styles.text}>
-                Deploy test contract: <Text code>npm run deploy</Text> on a new
-                terminal
+                Deploy test contract: <Text code>npm run deploy</Text> on a new terminal
               </Text>
             </Timeline.Item>
             <Timeline.Item dot="✅" style={styles.text}>
               <Text>
-                Open the 📄<Text strong> Contract</Text> tab
+                Open the <Text strong>📄 Contract</Text> tab
               </Text>
             </Timeline.Item>
           </Timeline>
         </Card>
         <Card
           style={{ marginTop: "10px", ...styles.card }}
-          title={
-            <>
-              📡{" "}
-              <Text strong> Connecting your Local Chain to the Moralis DB</Text>
-            </>
-          }
+          title={<h1 style={styles.title}>📡 Connecting your Local Chain to the Moralis DB</h1>}
         >
           <Timeline mode="left" style={styles.timeline}>
             <Timeline.Item dot="💿">
@@ -211,14 +190,12 @@ export default function QuickStart({ isServerInfo }) {
             </Timeline.Item>
             <Timeline.Item dot="⚙️">
               <Text style={styles.text}>
-                Connect your Moralis Database and Local Chain:{" "}
-                <Text code>npm run connect</Text>
+                Connect your Moralis Database and Local Chain: <Text code>npm run connect</Text>
               </Text>
             </Timeline.Item>
             <Timeline.Item dot="💾">
               <Text style={styles.text}>
-                Add contract events you want to watch:{" "}
-                <Text code>npm run watch:events</Text>
+                Add contract events you want to watch: <Text code>npm run watch:events</Text>
               </Text>
             </Timeline.Item>
           </Timeline>
