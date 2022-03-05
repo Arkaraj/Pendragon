@@ -63,16 +63,26 @@ function NFTBalance() {
     });
   }
 
-
   async function approveAll(nft) {
-    setLoading(true);  
+    setLoading(true);
     const ops = {
       contractAddress: nft.token_address,
       functionName: "setApprovalForAll",
-      abi: [{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+      abi: [
+        {
+          inputs: [
+            { internalType: "address", name: "operator", type: "address" },
+            { internalType: "bool", name: "approved", type: "bool" },
+          ],
+          name: "setApprovalForAll",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
       params: {
         operator: marketAddress,
-        approved: true
+        approved: true,
       },
     };
 
@@ -215,19 +225,18 @@ function NFTBalance() {
         onOk={() => list(nftToSend, price)}
         okText="List"
         footer={[
-          <Button onClick={() => setVisibility(false)}>
-            Cancel
-          </Button>,
+          <Button onClick={() => setVisibility(false)}>Cancel</Button>,
           <Button onClick={() => approveAll(nftToSend)} type="primary">
             Approve
           </Button>,
           <Button onClick={() => list(nftToSend, price)} type="primary">
             List
-          </Button>
+          </Button>,
         ]}
       >
         <Spin spinning={loading}>
           <img
+            alt={`${nftToSend?.name}`}
             src={`${nftToSend?.image}`}
             style={{
               width: "250px",
